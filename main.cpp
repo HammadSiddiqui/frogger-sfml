@@ -1,21 +1,24 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Game.h"
 
 
 int main() {
 
+
+    Game game;
+    game.run();
+
+
+
+
+
+/*
     sf::RenderWindow window(sf::VideoMode(640,480,32),"Frogger");
     sf::Color blueColor(0,0,55);
     // Load Font
     sf::Font font;
     font.loadFromFile("assets/Abduction.ttf");
-
-    // Load a texture to display
-  //  sf::Texture allSprites;
-
-  //  if (!allSprites.loadFromFile("assets/allsprites.png"))
-  //      return EXIT_FAILURE;
-
 
       sf::Texture frog;
 
@@ -60,6 +63,6 @@ int main() {
         }
 
     }
-
+*/
     return 0;
 }
