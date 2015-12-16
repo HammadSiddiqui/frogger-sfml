@@ -6,6 +6,12 @@
 #define FROGGER_GAME_H
 
 
+#define TRUCK_HEIGHT 290
+#define CAR1_HEIGHT 315
+#define CAR2_HEIGHT 355
+#define TRACTOR_HEIGHT 379
+#define CAR3_HEIGHT 415
+
 #include <SFML/Graphics.hpp>
 
 class Game {
