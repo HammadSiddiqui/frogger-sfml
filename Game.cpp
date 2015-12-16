@@ -21,8 +21,9 @@ Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger")  {
     mWindow.clear(blueColor);
     //initialize frog to its position
     initWindow();
-    initCarsAndWood();
+    initCars();
     initFrog();
+    initWood();
     initScorecard();
     mWindow.display();
 
@@ -45,7 +46,7 @@ void Game::initWindow() {
 }
 
 
-void Game::initCarsAndWood() {
+void Game::initCars() {
 
     //Init truck
     sf::Texture truck;
@@ -53,7 +54,7 @@ void Game::initCarsAndWood() {
     sf::Sprite truckSprite;
     truckSprite.setTexture(truck);
     truckSprite.scale(2,2);
-    truckSprite.setPosition(1,TRUCK_HEIGHT);
+    truckSprite.setPosition(1,ROAD_ROW_1_HEIGHT);
     mWindow.draw(truckSprite);
 
     //Init car1
@@ -62,7 +63,7 @@ void Game::initCarsAndWood() {
     sf::Sprite car1Sprite;
     car1Sprite.setTexture(car1);
     car1Sprite.scale(2,2);
-    car1Sprite.setPosition(1,CAR1_HEIGHT);
+    car1Sprite.setPosition(1,ROAD_ROW_2_HEIGHT);
     mWindow.draw(car1Sprite);
 
 
@@ -72,7 +73,7 @@ void Game::initCarsAndWood() {
     sf::Sprite car2Sprite;
     car2Sprite.setTexture(car2);
     car2Sprite.scale(2,2);
-    car2Sprite.setPosition(1,CAR2_HEIGHT);
+    car2Sprite.setPosition(1,ROAD_ROW_3_HEIGHT);
     mWindow.draw(car2Sprite);
 
 
@@ -82,21 +83,34 @@ void Game::initCarsAndWood() {
     sf::Sprite car3Sprite;
     car3Sprite.setTexture(car3);
     car3Sprite.scale(2,2);
-    car3Sprite.setPosition(1,CAR3_HEIGHT);
+    car3Sprite.setPosition(1,ROAD_ROW_5_HEIGHT);
     mWindow.draw(car3Sprite);
 
     //Init tractor
     sf::Texture tractor;
     if(!tractor.loadFromFile("assets/tractor.png"))
         std::cout << "Failed to load tracktor Sprite" << std::endl;
-    sf::Sprite tractorSprite;
+
     tractorSprite.setTexture(tractor);
     tractorSprite.scale(2,2);
-    tractorSprite.setPosition(1,TRACTOR_HEIGHT);
+    tractorSprite.setPosition(1,ROAD_ROW_4_HEIGHT);
     mWindow.draw(tractorSprite);
 
 
+}
 
+
+void Game::initWood() {
+
+    //Init woods
+    sf::Texture wood1;
+    if(!wood1.loadFromFile("assets/wood.png"))
+        std::cout << "Failed to load tracktor Sprite" << std::endl;
+
+    wood1Sprite.setTexture(wood1);
+    wood1Sprite.scale(2,2);
+    wood1Sprite.setPosition(1,WOOD_ROW_1);
+    mWindow.draw(wood1Sprite);
 }
 
 
@@ -134,14 +148,31 @@ void Game::run() {
 }
 
 void Game::processEvents() {
-    sf::Event event;
+
     while(mWindow.pollEvent(event)) {
+
+
+        switch (event.type) {
+            case sf::Event::KeyPressed :
+                handlePlayerInput(event.key.code, true);
+                break;
+            case sf::Event::KeyReleased:
+                handlePlayerInput(event.key.code, false);
+                break;
+            case sf::Event::Closed:
+                mWindow.close();
+                break;
+        }
+
+
+        /*
         if(event.type == sf::Event::Closed) {
             mWindow.close();
         }
-        else if (sf::Event::KeyPressed) {
+        else if (event.type == sf::Event::KeyPressed) {
             std::cout << "Key Pressed" << std::endl;
         }
+         */
     }
 }
 
@@ -161,11 +192,35 @@ void Game::update() {
         //While frogger is within the river range
             //If position of frogger
     //Get new positions of all the vehicles which will be passed to render
+    sf::Vector2f movement(0.f, 0.f);
+    if (mIsMovingUp)
+        movement.y -= 1.f;
+    if (mIsMovingDown)
+        movement.y += 1.f;
+    if (mIsMovingLeft)
+        movement.x -= 1.f;
+    if (mIsMovingRight)
+        movement.x += 1.f;
+    frogSprite.move(movement);
+
 }
 
 
-/*
 
+void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
+
+    if(key == sf::Keyboard::Up)
+        mIsMovingUp = isPressed;
+    else if (key == sf::Keyboard::S)
+        mIsMovingDown = isPressed;
+    else if (key == sf::Keyboard::A)
+        mIsMovingLeft = isPressed;
+    else if (key == sf::Keyboard::D)
+        mIsMovingRight = isPressed;
+
+}
+
+/*
 
 
 void Game::welcomeScreen() {
