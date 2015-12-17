@@ -19,20 +19,23 @@ class Game {
     private:
         sf::RenderWindow mWindow;
         sf::Event event;
+        sf::Text scoreText;
         sf::Sprite frogSprite;
         sf::Sprite tractorSprite;
         sf::Sprite wood1Sprite;
         sf::Font font;
 
         //The following methods are private because they should not be accessed directly from the main() function
-        void processEvents();
-        void update();
-        void initWindow(); //Add all backgrounds to window
+        void processEvents(); //Continuous fire of Events from the mWindow into the Event Queue.
+        void update(); //Performs all the logic based on the Events in the Event Queue
+        void initWindow(); //Adds static background (Grass and Roads) to mWindow object
         void initFrog(); //init frog on its position
         void initScorecard(); //init the scoreCard
         void initCars(); //Init random cars
         void initWood(); // Init random wood
-        void render();
+        void render(); //Calls all renders after the sprite positions are updated
+        void renderFrog(); //Render the frog based on its new updated position
+        void renderCars();
         void handlePlayerInput(sf::Keyboard::Key key,
        bool isPressed);
 

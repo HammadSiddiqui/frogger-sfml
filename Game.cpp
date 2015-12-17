@@ -10,14 +10,16 @@
  * Constructor creates an empty window object of size 640x480 pixels
  * And then, it calls all the initialization of other elements.
  * */
-Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger")  {
+Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger"), scoreText("121", font, 11)  {
 
-    mWindow.setFramerateLimit(30);
+    mWindow.setFramerateLimit(10);
     //Load Font
     if(!font.loadFromFile("assets/Abduction.ttf"))
     {
         std::cout << "Failed to load font \"Abduction\"" << std::endl;
     }
+
+
     //paint out the entire window with blue color
     sf::Color blueColor(0,0,55);
     mWindow.clear(blueColor);
@@ -102,6 +104,19 @@ void Game::initCars() {
 }
 
 
+void Game::renderCars() {
+    //Code
+
+    //Init truck
+    sf::Texture truck;
+    truck.loadFromFile("assets/truck.png");
+    sf::Sprite truckSprite;
+    truckSprite.setTexture(truck);
+    truckSprite.scale(2,2);
+    mWindow.draw(truckSprite);
+
+}
+
 void Game::initWood() {
 
     //Init woods
@@ -128,8 +143,24 @@ void Game::initFrog() {
     mWindow.draw(frogSprite);
 }
 
+
+void Game::renderFrog() {
+    sf::Texture frog;
+
+    if (!frog.loadFromFile("assets/frog.png"))
+        std::cout << "Failed to load frog Sprite" << std::endl;
+
+    frogSprite.setTexture(frog);
+    frogSprite.setScale(2.0,2.0);
+    //frogSprite.setPosition(mWindow.getSize().x/2  - frogSprite.getGlobalBounds().width/2 ,mWindow.getSize().y -70); //Initial position of the frog
+    mWindow.draw(frogSprite);
+}
+
+
+
 void Game::initScorecard() {
-    sf::Text scoreText("000",font,11);
+
+
     scoreText.setCharacterSize(20);
     scoreText.setPosition(mWindow.getSize().x/2 - scoreText.getGlobalBounds().width/2, 10);
     mWindow.draw(scoreText);
@@ -155,7 +186,6 @@ void Game::processEvents() {
 
     while(mWindow.pollEvent(event)) {
 
-
         switch (event.type) {
             case sf::Event::KeyPressed :
                 handlePlayerInput(event.key.code, true);
@@ -163,21 +193,16 @@ void Game::processEvents() {
             case sf::Event::KeyReleased :
                 handlePlayerInput(event.key.code, false);
                 break;
+
             case sf::Event::Closed:
                 mWindow.close();
                 break;
             default:
-                break;
+                continue;
         }
 
-        /*
-        if(event.type == sf::Event::Closed) {
-            mWindow.close();
-        }
-        else if (event.type == sf::Event::KeyPressed) {
-            std::cout << "Key Pressed" << std::endl;
-        }
-         */
+
+
     }
 }
 
@@ -185,7 +210,8 @@ void Game::processEvents() {
 void Game::render() {
     mWindow.clear(sf::Color::Transparent);
     initWindow();
-    mWindow.draw(frogSprite);
+    renderFrog();
+    mWindow.draw(scoreText);
     mWindow.display();
 }
 
@@ -202,13 +228,14 @@ void Game::update() {
     sf::Vector2f movement(0, 0);
 
     if (mIsMovingUp)
-        movement.y -= 3;
-    if (mIsMovingDown)
-        movement.y += 3;
-    if (mIsMovingLeft)
-        movement.x -= 3;
-    if (mIsMovingRight)
-        movement.x += 3;
+        movement.y -= 15;
+    else if (mIsMovingDown)
+        movement.y += 15;
+    else if (mIsMovingLeft)
+        movement.x -= 20;
+    else if (mIsMovingRight)
+        movement.x += 20;
+
 
     if(frogSprite.getPosition().x > 420){
         frogSprite.setPosition(420, frogSprite.getPosition().y);
