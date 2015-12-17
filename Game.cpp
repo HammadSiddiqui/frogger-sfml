@@ -29,7 +29,7 @@ Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger"), scoreText("121", fo
     initFrog();
     initWood();
     initScorecard();
-   // mWindow.display();
+   //mWindow.display();
 
 
 }
@@ -55,50 +55,58 @@ void Game::initCars() {
     //Init truck
     sf::Texture truck;
     truck.loadFromFile("assets/truck.png");
-    sf::Sprite truckSprite;
-    truckSprite.setTexture(truck);
-    truckSprite.scale(2,2);
-    truckSprite.setPosition(1,ROAD_ROW_1_HEIGHT);
-    mWindow.draw(truckSprite);
 
-    //Init car1
+
+    sf::Texture car3;
+    car3.loadFromFile("assets/car3.png");
+
     sf::Texture car1;
     car1.loadFromFile("assets/car1.png");
-    sf::Sprite car1Sprite;
+
+    sf::Texture car2;
+    car2.loadFromFile("assets/car2.png");
+
+    sf::Texture tractor;
+    if(!tractor.loadFromFile("assets/tractor.png"))
+        std::cout << "Failed to load tracktor Sprite" << std::endl;
+
+
+
+
+    //Init car1
+
+
     car1Sprite.setTexture(car1);
     car1Sprite.scale(2,2);
     car1Sprite.setPosition(1,ROAD_ROW_2_HEIGHT);
     mWindow.draw(car1Sprite);
 
 
-    //Init car2
-    sf::Texture car2;
-    car2.loadFromFile("assets/car2.png");
-    sf::Sprite car2Sprite;
-    car2Sprite.setTexture(car2);
-    car2Sprite.scale(2,2);
-    car2Sprite.setPosition(1,ROAD_ROW_3_HEIGHT);
-    mWindow.draw(car2Sprite);
 
+    for (int i = 0; i < 4; ++i) {
+        truckSprite[i].setTexture(truck);
+        truckSprite[i].scale(2,2);
+        truckSprite[i].setPosition(70 + (i*120),ROAD_ROW_1_HEIGHT);
+        mWindow.draw(truckSprite[i]);
 
-    //Init car3
-    sf::Texture car3;
-    car3.loadFromFile("assets/car3.png");
-    sf::Sprite car3Sprite;
-    car3Sprite.setTexture(car3);
-    car3Sprite.scale(2,2);
-    car3Sprite.setPosition(1,ROAD_ROW_5_HEIGHT);
-    mWindow.draw(car3Sprite);
+        car2Sprite[i].setTexture(car2);
+        car2Sprite[i].scale(2,2);
+        car2Sprite[i].setPosition(70 + (i*120), ROAD_ROW_3_HEIGHT);
+        mWindow.draw(car2Sprite[i]);
 
+        car3Sprite[i].setTexture(car3);
+        car3Sprite[i].scale(2,2);
+        car3Sprite[i].setPosition(170 + (i*120), ROAD_ROW_5_HEIGHT);
+        mWindow.draw(car3Sprite[i]);
+
+        tractorSprite[i].setTexture(tractor);
+        tractorSprite[i].scale(2,2);
+        tractorSprite[i].setPosition(120 + (i*120), ROAD_ROW_4_HEIGHT);
+        mWindow.draw(tractorSprite[i]);
+    }
     //Init tractor
-    sf::Texture tractor;
-    if(!tractor.loadFromFile("assets/tractor.png"))
-        std::cout << "Failed to load tracktor Sprite" << std::endl;
 
-    tractorSprite.setTexture(tractor);
-    tractorSprite.scale(2,2);
-    tractorSprite.setPosition(1,ROAD_ROW_4_HEIGHT);
-    mWindow.draw(tractorSprite);
+
 
 
 }
@@ -110,10 +118,37 @@ void Game::renderCars() {
     //Init truck
     sf::Texture truck;
     truck.loadFromFile("assets/truck.png");
-    sf::Sprite truckSprite;
-    truckSprite.setTexture(truck);
-    truckSprite.scale(2,2);
-    mWindow.draw(truckSprite);
+
+    sf::Texture car3;
+    car3.loadFromFile("assets/car3.png");
+
+    sf::Texture car2;
+    car2.loadFromFile("assets/car2.png");
+
+    //Tractor
+    sf::Texture tractor;
+    if(!tractor.loadFromFile("assets/tractor.png"))
+        std::cout << "Failed to load tracktor Sprite" << std::endl;
+
+    for (int i = 0; i < 4; ++i) {
+        tractorSprite[i].setTexture(tractor);
+        mWindow.draw(tractorSprite[i]);
+
+
+        truckSprite[i].setTexture(truck);
+        mWindow.draw(truckSprite[i]);
+
+        car3Sprite[i].setTexture(car3);
+        //  car2Sprite[i].setPosition(1 + (i*10), ROAD_ROW_3_HEIGHT);
+        mWindow.draw(car3Sprite[i]);
+
+        car2Sprite[i].setTexture(car2);
+        //car2Sprite[i].setPosition(1 + (i*10), ROAD_ROW_3_HEIGHT);
+        mWindow.draw(car2Sprite[i]);
+    }
+
+
+
 
 }
 
@@ -197,6 +232,7 @@ void Game::processEvents() {
             case sf::Event::Closed:
                 mWindow.close();
                 break;
+
             default:
                 continue;
         }
@@ -211,6 +247,7 @@ void Game::render() {
     mWindow.clear(sf::Color::Transparent);
     initWindow();
     renderFrog();
+    renderCars();
     mWindow.draw(scoreText);
     mWindow.display();
 }
@@ -264,6 +301,43 @@ void Game::update() {
 
     //std::cout << movement.x << ", " << movement.y << std::endl;
     std::cout << frogSprite.getPosition().x << ", " << frogSprite.getPosition().y << std::endl;
+
+
+    //Truck Sprite Movement
+    sf::Vector2f leftMovement(-3, 0);
+    sf::Vector2f rightMovement(3, 0);
+
+
+    for (int i = 0; i < 4; ++i) {
+
+        if(truckSprite[i].getPosition().x < -55) {
+            truckSprite[i].setPosition(450, ROAD_ROW_1_HEIGHT);
+        }
+        truckSprite[i].move(leftMovement);
+
+        car2Sprite[i].move(leftMovement);
+
+        if(car2Sprite[i].getPosition().x < -55) {
+            car2Sprite[i].setPosition(450, ROAD_ROW_3_HEIGHT);
+        }
+
+        car3Sprite[i].move(leftMovement);
+
+        if(car3Sprite[i].getPosition().x < -55) {
+            car3Sprite[i].setPosition(450, ROAD_ROW_5_HEIGHT);
+        }
+
+        tractorSprite[i].move(rightMovement);
+
+        if(tractorSprite[i].getPosition().x > 450) {
+            tractorSprite[i].setPosition(-10, ROAD_ROW_4_HEIGHT);
+        }
+    }
+
+
+
+
+
 
 }
 

@@ -21,7 +21,12 @@ class Game {
         sf::Event event;
         sf::Text scoreText;
         sf::Sprite frogSprite;
-        sf::Sprite tractorSprite;
+        sf::Sprite tractorSprite[4];
+        sf::Sprite truckSprite[4];
+        sf::Sprite car1Sprite;
+       // sf::Sprite car2Sprite;
+        sf::Sprite car2Sprite[4];
+        sf::Sprite car3Sprite[4];
         sf::Sprite wood1Sprite;
         sf::Font font;
 
