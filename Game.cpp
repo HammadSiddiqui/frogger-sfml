@@ -4,15 +4,17 @@
 
 #include "Game.h"
 #include <iostream>
+#include <string>
 
 
 /*
  * Constructor creates an empty window object of size 640x480 pixels
  * And then, it calls all the initialization of other elements.
  * */
-Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger"), scoreText("121", font, 11)  {
+Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger"), scoreText("0", font, 11)  {
 
     mWindow.setFramerateLimit(10);
+    score = 0;
     //Load Font
     if(!font.loadFromFile("assets/Abduction.ttf"))
     {
@@ -70,10 +72,6 @@ void Game::initCars() {
     if(!tractor.loadFromFile("assets/tractor.png"))
         std::cout << "Failed to load tracktor Sprite" << std::endl;
 
-
-
-
-    //Init car1
 
 
     car1Sprite.setTexture(car1);
@@ -147,10 +145,17 @@ void Game::renderCars() {
         mWindow.draw(car2Sprite[i]);
     }
 
-
-
-
 }
+
+
+void Game::renderScoreCard() {
+
+        if(score < 0) {
+            score = 0;
+        }
+        scoreText.setString(std::to_string(score));
+};
+
 
 void Game::initWood() {
 
@@ -195,11 +200,9 @@ void Game::renderFrog() {
 
 void Game::initScorecard() {
 
-
     scoreText.setCharacterSize(20);
     scoreText.setPosition(mWindow.getSize().x/2 - scoreText.getGlobalBounds().width/2, 10);
     mWindow.draw(scoreText);
-
 }
 
 
@@ -248,6 +251,7 @@ void Game::render() {
     initWindow();
     renderFrog();
     renderCars();
+    renderScoreCard();
     mWindow.draw(scoreText);
     mWindow.display();
 }
@@ -347,10 +351,12 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
     if(key == sf::Keyboard::Up){
         mIsMovingUp = isPressed;
-       // std::cout << "Up Pressed" << std::endl;
+       score++;
     }
-    else if (key == sf::Keyboard::Down)
+    else if (key == sf::Keyboard::Down) {
         mIsMovingDown = isPressed;
+        score--;
+    }
     else if (key == sf::Keyboard::Left)
         mIsMovingLeft = isPressed;
     else if (key == sf::Keyboard::Right)

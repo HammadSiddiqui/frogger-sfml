@@ -17,6 +17,7 @@
 
 class Game {
     private:
+        int score;
         sf::RenderWindow mWindow;
         sf::Event event;
         sf::Text scoreText;
@@ -41,6 +42,7 @@ class Game {
         void render(); //Calls all renders after the sprite positions are updated
         void renderFrog(); //Render the frog based on its new updated position
         void renderCars();
+        void renderScoreCard();
         void handlePlayerInput(sf::Keyboard::Key key,
        bool isPressed);
 
