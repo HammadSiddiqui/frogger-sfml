@@ -11,6 +11,8 @@
  * And then, it calls all the initialization of other elements.
  * */
 Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger")  {
+
+    mWindow.setFramerateLimit(30);
     //Load Font
     if(!font.loadFromFile("assets/Abduction.ttf"))
     {
@@ -105,7 +107,7 @@ void Game::initWood() {
     //Init woods
     sf::Texture wood1;
     if(!wood1.loadFromFile("assets/wood.png"))
-        std::cout << "Failed to load tracktor Sprite" << std::endl;
+        std::cout << "Failed to load wood Sprite" << std::endl;
 
     wood1Sprite.setTexture(wood1);
     wood1Sprite.scale(2,2);
@@ -137,13 +139,13 @@ void Game::initScorecard() {
 
 void Game::run() {
    // welcomeScreen();
-    sf::Clock clock;
+
     while(mWindow.isOpen()) {
-        sf::Time deltaTime = clock.restart();
+
         //Respond to Events in the Event Queue
         processEvents();
         //Update the Game according to the events
-        update(deltaTime);
+        update();
         //Render the update screen in the window.
         render();
     }
@@ -164,8 +166,9 @@ void Game::processEvents() {
             case sf::Event::Closed:
                 mWindow.close();
                 break;
+            default:
+                break;
         }
-
 
         /*
         if(event.type == sf::Event::Closed) {
@@ -180,12 +183,14 @@ void Game::processEvents() {
 
 
 void Game::render() {
-   // mWindow.clear();
+    mWindow.clear(sf::Color::Transparent);
+    initWindow();
+    mWindow.draw(frogSprite);
     mWindow.display();
 }
 
 
-void Game::update(sf::Time deltaTime) {
+void Game::update() {
 
     //All logic goes in here
     //Get current position of frog
@@ -194,17 +199,45 @@ void Game::update(sf::Time deltaTime) {
         //While frogger is within the river range
             //If position of frogger
     //Get new positions of all the vehicles which will be passed to render
-    sf::Vector2f movement(0.f, 0.f);
+    sf::Vector2f movement(0, 0);
+
     if (mIsMovingUp)
-        movement.y -= 1.f;
+        movement.y -= 3;
     if (mIsMovingDown)
-        movement.y += 1.f;
+        movement.y += 3;
     if (mIsMovingLeft)
-        movement.x -= 1.f;
+        movement.x -= 3;
     if (mIsMovingRight)
-        movement.x += 1.f;
-    frogSprite.move(movement * deltaTime.asSeconds());
-    tractorSprite.move(30.0,30.0);
+        movement.x += 3;
+
+    if(frogSprite.getPosition().x > 420){
+        frogSprite.setPosition(420, frogSprite.getPosition().y);
+        movement.x = 0;
+        movement.y = 0;
+    }
+    else if (frogSprite.getPosition().y > 450) {
+        frogSprite.setPosition(frogSprite.getPosition().x, 450);
+        movement.x = 0;
+        movement.y = 0;
+    }
+    else if(frogSprite.getPosition().x < 0){
+        frogSprite.setPosition(0, frogSprite.getPosition().y);
+        movement.x = 0;
+        movement.y = 0;
+    }
+
+    else if(frogSprite.getPosition().y < 63){
+        frogSprite.setPosition(frogSprite.getPosition().x, 63);
+        movement.x = 0;
+        movement.y = 0;
+    }
+
+    frogSprite.move(movement);
+
+
+    //std::cout << movement.x << ", " << movement.y << std::endl;
+    std::cout << frogSprite.getPosition().x << ", " << frogSprite.getPosition().y << std::endl;
+
 }
 
 
