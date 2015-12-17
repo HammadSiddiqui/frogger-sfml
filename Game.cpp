@@ -4,7 +4,7 @@
 
 #include "Game.h"
 #include <iostream>
-#include <curses.h>
+
 
 /*
  * Constructor creates an empty window object of size 640x480 pixels
@@ -25,7 +25,7 @@ Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger")  {
     initFrog();
     initWood();
     initScorecard();
-    mWindow.display();
+   // mWindow.display();
 
 
 }
@@ -137,11 +137,13 @@ void Game::initScorecard() {
 
 void Game::run() {
    // welcomeScreen();
+    sf::Clock clock;
     while(mWindow.isOpen()) {
+        sf::Time deltaTime = clock.restart();
         //Respond to Events in the Event Queue
         processEvents();
         //Update the Game according to the events
-        update();
+        update(deltaTime);
         //Render the update screen in the window.
         render();
     }
@@ -156,7 +158,7 @@ void Game::processEvents() {
             case sf::Event::KeyPressed :
                 handlePlayerInput(event.key.code, true);
                 break;
-            case sf::Event::KeyReleased:
+            case sf::Event::KeyReleased :
                 handlePlayerInput(event.key.code, false);
                 break;
             case sf::Event::Closed:
@@ -179,11 +181,11 @@ void Game::processEvents() {
 
 void Game::render() {
    // mWindow.clear();
-   // mWindow.display();
+    mWindow.display();
 }
 
 
-void Game::update() {
+void Game::update(sf::Time deltaTime) {
 
     //All logic goes in here
     //Get current position of frog
@@ -201,21 +203,23 @@ void Game::update() {
         movement.x -= 1.f;
     if (mIsMovingRight)
         movement.x += 1.f;
-    frogSprite.move(movement);
-
+    frogSprite.move(movement * deltaTime.asSeconds());
+    tractorSprite.move(30.0,30.0);
 }
 
 
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
-    if(key == sf::Keyboard::Up)
+    if(key == sf::Keyboard::Up){
         mIsMovingUp = isPressed;
-    else if (key == sf::Keyboard::S)
+       // std::cout << "Up Pressed" << std::endl;
+    }
+    else if (key == sf::Keyboard::Down)
         mIsMovingDown = isPressed;
-    else if (key == sf::Keyboard::A)
+    else if (key == sf::Keyboard::Left)
         mIsMovingLeft = isPressed;
-    else if (key == sf::Keyboard::D)
+    else if (key == sf::Keyboard::Right)
         mIsMovingRight = isPressed;
 
 }

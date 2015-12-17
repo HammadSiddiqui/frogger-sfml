@@ -26,7 +26,7 @@ class Game {
 
         //The following methods are private because they should not be accessed directly from the main() function
         void processEvents();
-        void update();
+        void update(sf::Time deltaTime);
         void initWindow(); //Add all backgrounds to window
         void initFrog(); //init frog on its position
         void initScorecard(); //init the scoreCard
