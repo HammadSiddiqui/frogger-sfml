@@ -47,7 +47,7 @@ class Game {
         sf::Sprite wood6Sprite[4];
         sf::Font font;
 
-        bool gameOver;
+        bool gameOver, frogOnWood, frogWin;
 
         //The following methods are private because they should not be accessed directly from the main() function
         void processEvents(); //Continuous fire of Events from the mWindow into the Event Queue.
