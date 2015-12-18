@@ -11,7 +11,12 @@
 #define ROAD_ROW_3_HEIGHT 355
 #define ROAD_ROW_4_HEIGHT 379
 #define ROAD_ROW_5_HEIGHT 415
-#define WOOD_ROW_1 100
+#define WOOD_ROW_1 90
+#define WOOD_ROW_2 120
+#define WOOD_ROW_3 150
+#define WOOD_ROW_4 175
+#define WOOD_ROW_5 200
+#define WOOD_ROW_6 220
 
 #include <SFML/Graphics.hpp>
 
@@ -21,14 +26,20 @@ class Game {
         sf::RenderWindow mWindow;
         sf::Event event;
         sf::Text scoreText;
+
         sf::Sprite frogSprite;
         sf::Sprite tractorSprite[4];
         sf::Sprite truckSprite[4];
-        sf::Sprite car1Sprite;
-       // sf::Sprite car2Sprite;
+        sf::Sprite car1Sprite[4];
         sf::Sprite car2Sprite[4];
         sf::Sprite car3Sprite[4];
-        sf::Sprite wood1Sprite;
+
+        sf::Sprite wood1Sprite[4];
+        sf::Sprite wood2Sprite[4];
+        sf::Sprite wood3Sprite[4];
+        sf::Sprite wood4Sprite[4];
+        sf::Sprite wood5Sprite[4];
+        sf::Sprite wood6Sprite[4];
         sf::Font font;
 
         //The following methods are private because they should not be accessed directly from the main() function
@@ -42,6 +53,7 @@ class Game {
         void render(); //Calls all renders after the sprite positions are updated
         void renderFrog(); //Render the frog based on its new updated position
         void renderCars();
+        void renderWoods();
         void renderScoreCard();
         void handlePlayerInput(sf::Keyboard::Key key,
        bool isPressed);
