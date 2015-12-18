@@ -3,7 +3,7 @@ project(frogger)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp Game.cpp Game.h)
+set(SOURCE_FILES main.cpp Game.cpp Game.h Collision.cpp Collision.h)
 add_executable(frogger ${SOURCE_FILES})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")

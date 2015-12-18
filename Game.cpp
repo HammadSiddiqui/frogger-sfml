@@ -4,14 +4,18 @@
 
 #include "Game.h"
 #include <iostream>
-//#include <string>
-
+#include "collision.h"
 
 /*
  * Constructor creates an empty window object of size 640x480 pixels
  * And then, it calls all the initialization of other elements.
  * */
 Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger"), scoreText("0", font, 11)  {
+
+    // Load a music to play
+    gameOver = false;
+    if (!music.openFromFile("assets/music.ogg"))
+        std::cout << "Music Failed to load" << std::endl;
 
     mWindow.setFramerateLimit(10); //Game Speed
     score = 0;
@@ -32,6 +36,7 @@ Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger"), scoreText("0", font
     initFrog();
     initWood();
     initScorecard();
+    music.play();
 
 
 
@@ -363,7 +368,14 @@ void Game::run() {
    // welcomeScreen();
 
     while(mWindow.isOpen()) {
-
+        if(gameOver){
+            sf::Text gameover("Game Over", font, 32);
+            gameover.setPosition(mWindow.getSize().x/2 - gameover.getGlobalBounds().width/2,
+                             mWindow.getSize().y/2 - gameover.getGlobalBounds().height/2);
+            mWindow.clear(sf::Color::Blue);
+            mWindow.draw(gameover);
+            break;
+        }
         //Respond to Events in the Event Queue
         processEvents();
         //Update the Game according to the events
@@ -420,6 +432,36 @@ void Game::update() {
         //While frogger is within the river range
             //If position of frogger
     //Get new positions of all the vehicles which will be passed to render
+
+
+    /*
+     * While frog is in the road range:
+     *      detect collision on all cars of the row;
+     *      if any true, Game over!
+     *      y range 290p - 430
+     *      p
+     **/
+
+        if(frogSprite.getPosition().y > 290 && frogSprite.getPosition().y < 430) {
+            //Detect Collision on road
+            for (int i = 0; i < 4; ++i) {
+                if( Collision::BoundingBoxTest(frogSprite, truckSprite[i]) ||
+                        Collision::BoundingBoxTest(frogSprite, tractorSprite[i]) ||
+                            Collision::BoundingBoxTest(frogSprite, car1Sprite[i]) ||
+                            Collision::BoundingBoxTest(frogSprite, car2Sprite[i]) ||
+                            Collision::BoundingBoxTest(frogSprite, car3Sprite[i]) )
+                {
+                    gameOver = true;
+                    std::cout << "GAME OVER" << std::endl;
+                }
+            }
+        }
+
+    /*
+     * Collision Dectection for road ends here!
+     * */
+
+
     sf::Vector2f movement(0, 0); //frog Movement
 
     if (mIsMovingUp)
@@ -459,7 +501,7 @@ void Game::update() {
     }
 
     frogSprite.move(movement);
-
+    std::cout << frogSprite.getPosition().x << ", " << frogSprite.getPosition().y << std::endl;
 
     //Vehicle Sprite Movement
     sf::Vector2f leftMovement(-3, 0); //Speed = 3 pixel/computation-time to the left

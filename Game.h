@@ -19,11 +19,14 @@
 #define WOOD_ROW_6 220
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <vector>
 
 class Game {
     private:
         int score;
         sf::RenderWindow mWindow;
+        sf::Music music;
         sf::Event event;
         sf::Text scoreText;
 
@@ -34,6 +37,8 @@ class Game {
         sf::Sprite car2Sprite[4];
         sf::Sprite car3Sprite[4];
 
+        std::vector<std::vector<sf::Sprite>> woodSprites;
+
         sf::Sprite wood1Sprite[4];
         sf::Sprite wood2Sprite[4];
         sf::Sprite wood3Sprite[4];
@@ -41,6 +46,8 @@ class Game {
         sf::Sprite wood5Sprite[4];
         sf::Sprite wood6Sprite[4];
         sf::Font font;
+
+        bool gameOver;
 
         //The following methods are private because they should not be accessed directly from the main() function
         void processEvents(); //Continuous fire of Events from the mWindow into the Event Queue.
