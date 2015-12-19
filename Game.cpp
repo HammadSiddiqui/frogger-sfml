@@ -19,15 +19,15 @@ Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger"),
                mIsMovingRight(false),
                mIsMovingUp(false)  {
 
-
-    gameOver = false;
-    frogWin = false;
+   // welcomeScreen(); Text not showing up, Dont know why
+    gameOver = false; //Init gameOver to -1
+    frogWin = false; ///Init frogWin to -1
 
     // Load a music to play
     if (!music.openFromFile("assets/music.ogg"))
         std::cout << "Music Failed to load" << std::endl;
 
-    //Game Speed
+    //Game Speed based on frame rate
     mWindow.setFramerateLimit(10);
 
     //Initial Score
@@ -59,7 +59,7 @@ Game::Game() : mWindow(sf::VideoMode(450,520,32),"Frogger"),
 
 void Game::initWindow() {
 
-    //Draw the asset -> background
+    //Draw the background
     sf::Texture path;
     path.loadFromFile("assets/background.png");
     sf::Sprite bg;
@@ -67,6 +67,7 @@ void Game::initWindow() {
     bg.scale(2,2);
     bg.setPosition(1,50);
     mWindow.draw(bg);
+    //Cute frog Sprite is also called here as it is not moving
     initCuteFrog();
 
 
@@ -75,7 +76,11 @@ void Game::initWindow() {
 
 void Game::initCars() {
 
-    //Init truck
+    /*
+     * First the texture is loaded, and then the texture is pasted
+     * on an SFML Sprite Object
+     * Each asset has its own texture and Sprite
+     * */
     sf::Texture truck;
     truck.loadFromFile("assets/truck.png");
 
@@ -140,7 +145,13 @@ void Game::initCars() {
 
 void Game::initWood() {
 
-    //Init woods
+    /*
+       * First the texture is loaded, and then the texture is pasted
+       * on an SFML Sprite Object
+       * Each asset has its own texture and Sprite
+       * */
+
+    //Init woods and place them on their positions.
     sf::Texture wood1;
     if(!wood1.loadFromFile("assets/wood.png"))
         std::cout << "Failed to load wood Sprite" << std::endl;
@@ -153,7 +164,7 @@ void Game::initWood() {
         wood1Sprite[i].setPosition(70 + (i * 170), WOOD_ROW_1);
         mWindow.draw(wood1Sprite[i]);
         if(i%2 == 0) {
-            wood1Sprite[i].setScale(2.5,2.0);
+            wood1Sprite[i].setScale(2.5,2.5);
         }
         else {
             wood1Sprite[i].setScale(2.0,2.0);
@@ -216,6 +227,12 @@ void Game::initWood() {
 
 
 void Game::initFrog() {
+    /*
+   * First the texture is loaded, and then the texture is pasted
+   * on an SFML Sprite Object
+   * Each asset has its own texture and Sprite
+   * */
+
     sf::Texture frog;
 
     if (!frog.loadFromFile("assets/frog.png"))
@@ -241,7 +258,7 @@ void Game::initCuteFrog() {
 }
 
 void Game::renderCars() {
-    //Code
+
 
     //Init truck
     sf::Texture truck;
@@ -408,6 +425,11 @@ void Game::run() {
 }
 
 void Game::processEvents() {
+    /*
+       * This method catches all the events happening inside the window
+       * and adds all these events to the event queue.
+       * The queue is the used to program logic according to the type of event
+       * */
 
     while(mWindow.pollEvent(event)) {
 
@@ -435,14 +457,33 @@ void Game::processEvents() {
 
 void Game::render() {
 
+    /*
+     * After the positions of the vechicle and wood logs are updated un the "update()" method
+     * All these updates needs to be rendered on the window.
+     * This method also renders the screens for game over and game win.
+     * */
 
+    //If the frog is able to successfully collide with cute Frog, it wins and this is rendered
     if(frogWin){
         mWindow.clear(sf::Color::Black);
         sf::Text win("You Win", font, 32);
         win.setPosition(mWindow.getSize().x/2 - frogSprite.getGlobalBounds().width/2,
                         mWindow.getSize().y/2 - frogSprite.getGlobalBounds().height/2);
         mWindow.draw(win);
-
+        mWindow.display();
+        sf::Time t1 = sf::seconds(1.0f);
+        sf::sleep(t1);
+        mWindow.close();
+    }
+    else if (gameOver) {
+        mWindow.clear(sf::Color::Black);
+        sf::Text lose("Game Over " + std::to_string(score), font, 22);
+        lose.setPosition((mWindow.getSize().x/2 - frogSprite.getGlobalBounds().width/2) -50,
+                        mWindow.getSize().y/2 - frogSprite.getGlobalBounds().height/2);
+        mWindow.draw(lose);
+        mWindow.display();
+        sf::Time t1 = sf::seconds(7.0f);
+        sf::sleep(t1);
         mWindow.close();
     }
     else{
@@ -470,7 +511,7 @@ void Game::detectCollision() {
     *      p
     **/
 
-    if(frogSprite.getPosition().y > 290 && frogSprite.getPosition().y < 430) {
+    if(frogSprite.getPosition().y > 290 && frogSprite.getPosition().y < 450) {
         //Detect Collision on road
         for (int i = 0; i < 4; ++i) {
             if( Collision::BoundingBoxTest(frogSprite, truckSprite[i]) ||
@@ -482,9 +523,7 @@ void Game::detectCollision() {
                 gameOver = true;
                 std::cout << "GAME OVER" << std::endl;
             }
-            else {
-                gameOver = false;
-            }
+
         }
     }
 
@@ -518,6 +557,7 @@ void Game::detectCollision() {
             else {
                 gameOver = true;
                 frogOnWood = false;
+
             }
         }
     }
@@ -534,6 +574,12 @@ void Game::detectCollision() {
 
 
 void Game::moveFrog() {
+
+    /*
+   * This method is a helper method called in update() method to calculate the new positions of
+   * the frog.
+   * */
+
     sf::Vector2f movement(0, 0); //frog Movement
 
     if (mIsMovingUp)
@@ -569,15 +615,17 @@ void Game::moveFrog() {
         frogSprite.setPosition(frogSprite.getPosition().x, 73);
         movement.x = 0;
         movement.y = 0;
-        std::cout << "Win Win" << std::endl;
     }
 
-    std::cout << "frog about to move " << movement.x << ' ' << movement.y << "\n";
     frogSprite.move(movement);
 }
 
 
 void Game::moveVehicleAndWoods() {
+    /*
+     * This method is a helper method called in update() method to calculate the new positions of
+     * the vehicles and wood logs.
+     * */
     //Vehicle Sprite Movement
     sf::Vector2f leftMovement(-3, 0); //Speed = 3 pixel/computation-time to the left
     sf::Vector2f rightMovement(3, 0); // Speed = 3 to the right
@@ -686,33 +734,8 @@ void Game::update() {
 
 
     detectCollision();
-
     moveFrog();
     moveVehicleAndWoods();
-
-
-//    std::cout << frogSprite.getPosition().x << ", " << frogSprite.getPosition().y << std::endl;
-
-
-
-
-
-
-/*
-    if(frogSprite.getPosition().y <=93 && ((frogSprite.getPosition().x >=193 && frogSprite.getPosition().x <= 223) ||
-            (frogSprite.getPosition().x >=296 && frogSprite.getPosition().x <= 313) ||
-                (frogSprite.getPosition().x >=13 && frogSprite.getPosition().x <= 32))) {
-        std::cout << "Won" << std::endl;
-        frogWin = true;
-    }
-    else if (frogSprite.getPosition().y <=93 && ((frogSprite.getPosition().x >=103 && frogSprite.getPosition().x <= 118) ||
-                (frogSprite.getPosition().x >=394 && frogSprite.getPosition().x <= 420))) {
-        gameOver = true;
-        std::cout << "Lost" << std::endl;
-        frogWin=false;
-    }
-
-*/
 
 }
 
@@ -720,11 +743,14 @@ void Game::update() {
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
+    /*
+   * This method is a helper method called in processEvents() method to
+   * look for the type of keyboard key pressed.
+   * */
 
     if(key == sf::Keyboard::Up){
         mIsMovingUp = isPressed;
        score++;
-        std::cout << "moving up\n";
     }
     else if (key == sf::Keyboard::Down) {
         mIsMovingDown = isPressed;
@@ -742,23 +768,21 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
     }
 
+
 /*
 
-
 void Game::welcomeScreen() {
-    mWindow.clear(blueColor);
+   // sf::Color blueColor(0,0,55);
+    mWindow.clear(sf::Color::Black);
+
     sf::Text text("Frogger",font,32);
-    text.setCharacterSize(32);
-    text.setPosition(mWindow.getSize().x/2 - text.getGlobalBounds().width/2,
-                     mWindow.getSize().y/2 - text.getGlobalBounds().height/2);
+    text.setColor(sf::Color::White);
+    text.setPosition(300,300);
     mWindow.draw(text);
-    sf::Event pressed;
-        while(mWindow.pollEvent(pressed)) {
-            if(pressed.type == sf::Event::KeyPressed) {
-                std::cout << "Hey pressed" << std::endl;
-                break;
-            }
-        }
+    mWindow.display();
+    sf::Time t1 = sf::seconds(3.0f);
+    sf::sleep(t1);
 }
 
  */
+

@@ -5,6 +5,9 @@
 #ifndef FROGGER_GAME_H
 #define FROGGER_GAME_H
 
+/*
+ * Each set of vehicle and wood logs have a constant height throughout the game
+ * */
 
 #define ROAD_ROW_1_HEIGHT 290
 #define ROAD_ROW_2_HEIGHT 315
@@ -16,7 +19,7 @@
 #define WOOD_ROW_3 150
 #define WOOD_ROW_4 175
 #define WOOD_ROW_5 200
-#define WOOD_ROW_6 220
+#define WOOD_ROW_6 230
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -67,7 +70,7 @@ class Game {
         void moveFrog();
         void moveVehicleAndWoods();
         void handlePlayerInput(sf::Keyboard::Key key,
-       bool isPressed);
+       bool isPressed); //Used as a helper method for moving the frog.
 
     public:
         bool mIsMovingUp, mIsMovingDown, mIsMovingLeft,mIsMovingRight;
@@ -75,7 +78,7 @@ class Game {
          //calls process, update and render methods from private.
         void run(); //While Window open
 
-   //     void welcomeScreen();
+       // void welcomeScreen();
 
 
 
