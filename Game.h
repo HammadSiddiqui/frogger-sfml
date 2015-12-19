@@ -31,13 +31,13 @@ class Game {
         sf::Text scoreText;
 
         sf::Sprite frogSprite;
+        sf::Sprite cuteFrogSprite;
         sf::Sprite tractorSprite[4];
         sf::Sprite truckSprite[4];
         sf::Sprite car1Sprite[4];
         sf::Sprite car2Sprite[4];
         sf::Sprite car3Sprite[4];
 
-        std::vector<std::vector<sf::Sprite>> woodSprites;
 
         sf::Sprite wood1Sprite[4];
         sf::Sprite wood2Sprite[4];
@@ -57,11 +57,15 @@ class Game {
         void initScorecard(); //init the scoreCard
         void initCars(); //Init random cars
         void initWood(); // Init random wood
+        void initCuteFrog();
         void render(); //Calls all renders after the sprite positions are updated
         void renderFrog(); //Render the frog based on its new updated position
         void renderCars();
         void renderWoods();
         void renderScoreCard();
+        void detectCollision();
+        void moveFrog();
+        void moveVehicleAndWoods();
         void handlePlayerInput(sf::Keyboard::Key key,
        bool isPressed);
 

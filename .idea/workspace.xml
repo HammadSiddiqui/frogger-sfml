@@ -11,7 +11,16 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3015557-522f-4122-88e6-a949ef3ffe94" name="Default" comment="">
+    <list default="true" id="d3015557-522f-4122-88e6-a949ef3ffe94" name="Default" comment="Frog Bug Fixed. Update method is now modular.&#10;Frog now wins when Collision with cuteFrogSprite on top.&#10;Next step: Win or Lose Screen.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/cuteFrog.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/music.ogg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/background.png" afterPath="$PROJECT_DIR$/assets/background.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/car1.png" afterPath="$PROJECT_DIR$/assets/car1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/car2.png" afterPath="$PROJECT_DIR$/assets/car2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/car3.png" afterPath="$PROJECT_DIR$/assets/car3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/tractor.png" afterPath="$PROJECT_DIR$/assets/tractor.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/truck.png" afterPath="$PROJECT_DIR$/assets/truck.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/wood.png" afterPath="$PROJECT_DIR$/assets/wood.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Game.cpp" afterPath="$PROJECT_DIR$/Game.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Game.h" afterPath="$PROJECT_DIR$/Game.h" />
@@ -39,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -50,8 +59,8 @@
       <file leaf-file-name="Game.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Game.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48164147">
-              <caret line="634" column="38" selection-start-line="634" selection-start-column="38" selection-end-line="634" selection-end-column="38" />
+            <state vertical-scroll-proportion="-0.046321526">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
                 <element signature="e#50#67#0" expanded="true" />
               </folding>
@@ -63,50 +72,10 @@
         <entry file="file://$PROJECT_DIR$/Game.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="42" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding>
                 <element signature="e#386#414#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Collision.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Collision.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Collision.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Collision.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FindSFML.cmake" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmake_modules/FindSFML.cmake">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="18" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -124,15 +93,15 @@
         <option value="$PROJECT_DIR$/Collision.cpp" />
         <option value="$PROJECT_DIR$/Collision.h" />
         <option value="$PROJECT_DIR$/main.cpp" />
-        <option value="$PROJECT_DIR$/Game.h" />
         <option value="$PROJECT_DIR$/Game.cpp" />
+        <option value="$PROJECT_DIR$/Game.h" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="728" />
+    <option name="height" value="696" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -309,21 +278,27 @@
       <option name="project" value="LOCAL" />
       <updated>1450428705706</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Next: frog Bug Fix, Game Over screen">
+      <created>1450438910330</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1450438910330</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="728" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="696" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.184375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32776934" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32695374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928678" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928678" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25493172" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26794258" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -359,7 +334,9 @@
     <MESSAGE value="Score Board Updated" />
     <MESSAGE value="Next Step: Detect Collision and Sound addition" />
     <MESSAGE value="Collision detection for road done.&#10;Next, collision detection for river" />
-    <option name="LAST_COMMIT_MESSAGE" value="Collision detection for road done.&#10;Next, collision detection for river" />
+    <MESSAGE value="Next: frog Bug Fix, Game Over screen" />
+    <MESSAGE value="Frog Bug Fixed. Update method is now modular.&#10;Frog now wins when Collision with cuteFrogSprite on top.&#10;Next step: Win or Lose Screen." />
+    <option name="LAST_COMMIT_MESSAGE" value="Frog Bug Fixed. Update method is now modular.&#10;Frog now wins when Collision with cuteFrogSprite on top.&#10;Next step: Win or Lose Screen." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -582,43 +559,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake_modules/FindSFML.cmake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Collision.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cmake_modules/FindSFML.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4524362">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38283062">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Collision.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3225058">
+          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Collision.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.76566124">
           <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
           <folding />
         </state>
@@ -627,7 +604,7 @@
     <entry file="file://$PROJECT_DIR$/Game.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="42" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
             <element signature="e#386#414#0" expanded="true" />
           </folding>
@@ -636,8 +613,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Game.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48164147">
-          <caret line="634" column="38" selection-start-line="634" selection-start-column="38" selection-end-line="634" selection-end-column="38" />
+        <state vertical-scroll-proportion="-0.046321526">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="e#50#67#0" expanded="true" />
           </folding>
